@@ -1,10 +1,10 @@
 package uz.uzdroid.randomdogsphotowithapi
 
 import android.graphics.drawable.AnimationDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
@@ -13,10 +13,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.uzdroid.randomdogsphotowithapi.databinding.ActivityMainBinding
 import uz.uzdroid.randomdogsphotowithapi.service.ApiRequest
 import uz.uzdroid.randomdogsphotowithapi.service.BASE_URL
-import uz.uzdroid.randomdogsphotowithapi.databinding.ActivityMainBinding
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,18 +26,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Keeps the phone in light mode
+        // Telefonni light modeda ushlab turadi
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        // Starts up the background transitions
+        // Orqa fon animatsiyasini boshlaydi
         backgroundAnimation()
 
-        // Makes an API request as soon as the app starts
+        // Ilova ishga tushishi bilanoq API so'rovini yuboradi
         makeApiRequest()
 
         binding.floatingActionButton.setOnClickListener {
 
-            // FAB rotate animation
+            // FAB-ni aylantirish animatsiyasi
             binding.floatingActionButton.animate().apply {
                 rotationBy(360f)
                 duration = 1000
@@ -61,10 +60,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeApiRequest() {
         val api = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiRequest::class.java)
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
             try {
